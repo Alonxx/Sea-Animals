@@ -4,7 +4,7 @@ import { Box, Pressable, Modal, Center } from "native-base";
 import React from "react";
 import { AnimalCard } from "../AnimalCard";
 
-// Componente que renderiza un animal(lottie) .
+// Componente que renderiza un animal(lottie) y funcion de ver el AnimalCard .
 
 export const Animal: React.FC<TAnimal> = ({
   style,
