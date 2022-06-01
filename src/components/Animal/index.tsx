@@ -1,11 +1,10 @@
-import LottieView, { AnimationObject } from "lottie-react-native";
+import LottieView from "lottie-react-native";
 import { TAnimal } from "models";
 import { Box, Pressable, Modal, Center } from "native-base";
 import React from "react";
-import { StyleProp, ViewStyle } from "react-native";
 import { AnimalCard } from "../AnimalCard";
 
-//Componente que renderiza un animal(lottie).
+// Componente que renderiza un animal(lottie) .
 
 export const Animal: React.FC<TAnimal> = ({
   style,
@@ -19,7 +18,8 @@ export const Animal: React.FC<TAnimal> = ({
   return (
     <>
       <Center>
-        {/* Modal que muestra el Componente AnimalCard que contiene imagen y sonido */}
+        {/*  Modal que muestra el Componente AnimalCard que contiene imagen y sonido del animal
+         */}
         <Modal
           animationPreset="slide"
           size={"xl"}
@@ -36,7 +36,7 @@ export const Animal: React.FC<TAnimal> = ({
           </Modal.Content>
         </Modal>
       </Center>
-      {/* Funcion en el lottie que que muestra el modal  y renderiza el json*/}
+      {/*Pressable en el lottie que que muestra el modal */}
       <Pressable onPress={() => setShowCard(true)}>
         {({ isPressed }) => {
           return (
