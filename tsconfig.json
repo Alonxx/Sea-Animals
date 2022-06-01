@@ -1,6 +1,14 @@
 {
   "extends": "expo/tsconfig.base",
+  "esModuleInterop": true,
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "target": "es5",
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+  },
+  "include": [
+    "src",
+    "node_modules/declarations.d.ts"
+  ]
 }
