@@ -4,8 +4,9 @@ import { Box, Pressable, Modal, Center } from "native-base";
 import React from "react";
 import { AnimalCard } from "../AnimalCard";
 
-// Componente que renderiza un animal(lottie) y funcion de ver el AnimalCard .
-
+/**
+ * Componente que renderiza un animal y su funcion para ver la Card (imagen y sonido)
+ */
 export const Animal: React.FC<TAnimal> = ({
   style,
   title,
@@ -18,7 +19,7 @@ export const Animal: React.FC<TAnimal> = ({
   return (
     <>
       <Center>
-        {/*  Modal que muestra el Componente AnimalCard que contiene imagen y sonido del animal
+        {/* Modal que muestra el Componente AnimalCard que contiene imagen y sonido del animal
          */}
         <Modal
           animationPreset="slide"

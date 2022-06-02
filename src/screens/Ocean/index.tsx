@@ -1,9 +1,9 @@
-import { Box, Text, View, HStack, ScrollView } from "native-base";
+import { View, HStack, ScrollView } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
-import LottieView, { AnimationObject } from "lottie-react-native";
+import LottieView from "lottie-react-native";
 
 import { Animal } from "../../components";
-import { StyleProp, ViewStyle } from "react-native";
+
 import { TAnimal } from "models";
 
 export const Ocean: React.FC = () => {
@@ -88,7 +88,10 @@ export const Ocean: React.FC = () => {
         source={require("../../assets/UI/ocean.json")}
       >
         <SafeAreaView>
-          <ScrollView showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
             <HStack
               ml={10}
               justifyContent={"flex-start"}
