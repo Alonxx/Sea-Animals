@@ -1,39 +1,33 @@
-import { Home, Ocean, DDGame } from "./src/screens";
+import { Home, Ocean, DDGame, Lenguage } from "./src/screens";
 import { NativeBaseProvider } from "native-base";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-const Stack = createNativeStackNavigator();
+import { Route, Routes, NativeRouter } from "react-router-native";
+import LottieView from "lottie-react-native";
 
 const App = () => {
   return (
     <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="Home"
-            component={Home}
-          />
-          <Stack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="Ocean"
-            component={Ocean}
-          />
-          <Stack.Screen
-            options={{
-              headerShown: false,
-            }}
-            name="DDGame"
-            component={DDGame}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <NativeRouter>
+        <LottieView
+          resizeMode="cover"
+          style={{
+            minHeight: "100%",
+            minWidth: "100%",
+            width: "100%",
+            height: "100%",
+          }}
+          autoPlay
+          loop
+          source={require("./src/assets/UI/ocean.json")}
+        >
+          <Routes>
+            <Route path="/" element={<Lenguage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/ocean" element={<Ocean />} />
+            <Route path="/ddgame" element={<DDGame />} />
+          </Routes>
+        </LottieView>
+      </NativeRouter>
     </NativeBaseProvider>
   );
 };

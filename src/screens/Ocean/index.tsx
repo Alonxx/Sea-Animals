@@ -5,13 +5,11 @@ import { Animal } from "../../components";
 import { TAnimal } from "models";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable } from "react-native";
+import { useNavigate } from "react-router-native";
 
-interface Props {
-  navigation: any;
-}
+interface Props {}
 
-export const Ocean: React.FC<Props> = ({ navigation }) => {
+export const Ocean: React.FC<Props> = () => {
   const [isEnter, setIsEnter] = React.useState<boolean>(false);
 
   const animals: TAnimal[] = [
@@ -79,65 +77,52 @@ export const Ocean: React.FC<Props> = ({ navigation }) => {
       animalSound: require("../../assets/animals/starfish.mp3"),
     },
   ];
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     setIsEnter(true);
   }, []);
 
   return (
     <View>
-      <LottieView
-        resizeMode="cover"
-        style={{
-          minHeight: "100%",
-          minWidth: "100%",
-          width: "100%",
-          height: "100%",
-        }}
-        autoPlay
-        loop
-        source={require("../../assets/UI/ocean.json")}
-      >
-        <SafeAreaView>
-          <ScrollView
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
+      <SafeAreaView>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
+          <Button
+            backgroundColor={"transparent"}
+            position="absolute"
+            onPress={() => navigate("/home")}
           >
-            <Button
-              backgroundColor={"transparent"}
-              position="absolute"
-              onPress={() => navigation.goBack()}
-            >
-              <Ionicons name="arrow-back" size={30} color="white" />
-            </Button>
+            <Ionicons name="arrow-back" size={30} color="white" />
+          </Button>
 
-            <LottieView
-              style={{
-                width: 500,
-                height: 500,
-                position: "absolute",
-                alignSelf: "center",
-                zIndex: 5,
-                display: isEnter ? "flex" : "none",
-              }}
-              onAnimationFinish={() => setIsEnter(false)}
-              autoPlay
-              loop={false}
-              source={require("../../assets/UI/swipeUp.json")}
-            />
-            <HStack
-              ml={10}
-              justifyContent={"flex-start"}
-              flexWrap={"wrap"}
-              width={"full"}
-            >
-              {animals.map((animal) => (
-                <Animal key={animal.title} {...animal} />
-              ))}
-            </HStack>
-          </ScrollView>
-        </SafeAreaView>
-      </LottieView>
+          <LottieView
+            style={{
+              width: 500,
+              height: 500,
+              position: "absolute",
+              alignSelf: "center",
+              zIndex: 5,
+              display: isEnter ? "flex" : "none",
+            }}
+            onAnimationFinish={() => setIsEnter(false)}
+            autoPlay
+            loop={false}
+            source={require("../../assets/UI/swipeUp.json")}
+          />
+          <HStack
+            ml={10}
+            justifyContent={"flex-start"}
+            flexWrap={"wrap"}
+            width={"full"}
+          >
+            {animals.map((animal) => (
+              <Animal key={animal.title} {...animal} />
+            ))}
+          </HStack>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
