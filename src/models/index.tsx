@@ -6,4 +6,5 @@ export type TAnimal = {
   animalBackground: any;
   animalPath: any;
   animalSound: any;
+  pressable?: boolean;
 };

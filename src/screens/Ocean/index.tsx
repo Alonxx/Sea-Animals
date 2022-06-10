@@ -1,12 +1,19 @@
-import { View, HStack, ScrollView } from "native-base";
+import { View, HStack, ScrollView, Button } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
-
 import { Animal } from "../../components";
-
 import { TAnimal } from "models";
+import React from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { Pressable } from "react-native";
 
-export const Ocean: React.FC = () => {
+interface Props {
+  navigation: any;
+}
+
+export const Ocean: React.FC<Props> = ({ navigation }) => {
+  const [isEnter, setIsEnter] = React.useState<boolean>(false);
+
   const animals: TAnimal[] = [
     {
       title: "Shark",
@@ -73,6 +80,10 @@ export const Ocean: React.FC = () => {
     },
   ];
 
+  React.useEffect(() => {
+    setIsEnter(true);
+  }, []);
+
   return (
     <View>
       <LottieView
@@ -92,6 +103,28 @@ export const Ocean: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           >
+            <Button
+              backgroundColor={"transparent"}
+              position="absolute"
+              onPress={() => navigation.goBack()}
+            >
+              <Ionicons name="arrow-back" size={30} color="white" />
+            </Button>
+
+            <LottieView
+              style={{
+                width: 500,
+                height: 500,
+                position: "absolute",
+                alignSelf: "center",
+                zIndex: 5,
+                display: isEnter ? "flex" : "none",
+              }}
+              onAnimationFinish={() => setIsEnter(false)}
+              autoPlay
+              loop={false}
+              source={require("../../assets/UI/swipeUp.json")}
+            />
             <HStack
               ml={10}
               justifyContent={"flex-start"}

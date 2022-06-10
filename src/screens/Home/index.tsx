@@ -1,4 +1,4 @@
-import { Box, Text, View, VStack, ScrollView, Center } from "native-base";
+import { Box, Text, VStack, ScrollView, Center } from "native-base";
 import LottieView from "lottie-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WaterButton } from "../../components";
@@ -45,7 +45,7 @@ export const Home: React.FC<Props> = ({ navigation }) => {
                 <WaterButton
                   title="Juegos 🐬"
                   titleColor="black"
-                  handler={() => {}}
+                  handler={() => navigation.navigate("DDGame")}
                   buttonColor={"#f2e205"}
                   style={{ width: 100, height: 100 }}
                 />

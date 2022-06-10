@@ -1,4 +1,4 @@
-import { Home, Ocean } from "./src/screens";
+import { Home, Ocean, DDGame } from "./src/screens";
 import { NativeBaseProvider } from "native-base";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -24,6 +24,13 @@ const App = () => {
             }}
             name="Ocean"
             component={Ocean}
+          />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="DDGame"
+            component={DDGame}
           />
         </Stack.Navigator>
       </NavigationContainer>

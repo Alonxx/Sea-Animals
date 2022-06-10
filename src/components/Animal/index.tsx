@@ -7,12 +7,14 @@ import { AnimalCard } from "../AnimalCard";
 /**
  * Componente que renderiza un animal y su funcion para ver la Card (imagen y sonido)
  */
+
 export const Animal: React.FC<TAnimal> = ({
   style,
   title,
   animalBackground,
   animalPath,
   animalSound,
+  pressable = true,
 }) => {
   const [showCard, setShowCard] = React.useState<boolean>(false);
 
@@ -38,7 +40,7 @@ export const Animal: React.FC<TAnimal> = ({
         </Modal>
       </Center>
       {/*Pressable en el lottie que que muestra el modal */}
-      <Pressable onPress={() => setShowCard(true)}>
+      <Pressable onPress={() => pressable && setShowCard(true)}>
         {({ isPressed }) => {
           return (
             <Box
