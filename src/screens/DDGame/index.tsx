@@ -18,6 +18,7 @@ import { ImageBackground, Pressable } from "react-native";
 import React, { useRef } from "react";
 import { Audio } from "expo-av";
 import { useNavigate } from "react-router-native";
+import I18n from "../../i18n/index";
 
 /*
  * Componente encargado de renderizar la screen del juego DragAndDrop
@@ -40,65 +41,66 @@ export const DDGame: React.FC<Props> = () => {
       style: { width: 90, height: 100 },
       animalBackground: require("../../assets/animals/shark.jpeg"),
       animalPath: require("../../assets/animals/shark.json"),
-      animalSound: require("../../assets/animals/shark.mp3"),
+      animalSound: require("../../assets/animals/shark_en.mp3"),
     },
     {
       title: "Octopus",
       style: { width: 100, height: 115 },
       animalBackground: require("../../assets/animals/octopus.jpeg"),
       animalPath: require("../../assets/animals/octopus.json"),
-      animalSound: require("../../assets/animals/octopus.mp3"),
+      animalSound: require("../../assets/animals/octopus_en.mp3"),
     },
     {
       title: "Turtle",
       style: { width: 100, height: 110 },
       animalBackground: require("../../assets/animals/turtle.jpeg"),
       animalPath: require("../../assets/animals/turtle.json"),
-      animalSound: require("../../assets/animals/turtle.mp3"),
+      animalSound: require("../../assets/animals/turtle_en.mp3"),
     },
     {
       title: "Squid",
       style: { width: 80, height: 90, marginTop: 5 },
       animalBackground: require("../../assets/animals/squid.jpeg"),
       animalPath: require("../../assets/animals/squid.json"),
-      animalSound: require("../../assets/animals/squid.mp3"),
+      animalSound: require("../../assets/animals/squid_en.mp3"),
     },
     {
       title: "Blowfish",
       style: { width: 90, height: 105, marginTop: -5 },
       animalBackground: require("../../assets/animals/blowfish.jpeg"),
       animalPath: require("../../assets/animals/blowfish.json"),
-      animalSound: require("../../assets/animals/blowfish.mp3"),
+      animalSound: require("../../assets/animals/blowfish_en.mp3"),
     },
     {
       title: "Fish",
       style: { width: 80, height: 80, marginTop: 5 },
       animalBackground: require("../../assets/animals/fish.jpeg"),
       animalPath: require("../../assets/animals/fish.json"),
-      animalSound: require("../../assets/animals/fish.mp3"),
+      animalSound: require("../../assets/animals/fish_en.mp3"),
     },
     {
       title: "Dolphin",
       style: { width: 70, height: 80, marginTop: 5 },
       animalBackground: require("../../assets/animals/dolphin.jpeg"),
       animalPath: require("../../assets/animals/dolphin.json"),
-      animalSound: require("../../assets/animals/dolphin.mp3"),
+      animalSound: require("../../assets/animals/dolphin_en.mp3"),
     },
     {
       title: "Crab",
       style: { width: 60, height: 70, marginTop: 5 },
       animalBackground: require("../../assets/animals/crab.jpeg"),
       animalPath: require("../../assets/animals/crab.json"),
-      animalSound: require("../../assets/animals/crab.mp3"),
+      animalSound: require("../../assets/animals/crab_en.mp3"),
     },
     {
       title: "Starfish",
       style: { width: 60, height: 70, marginLeft: 10, marginTop: 5 },
       animalBackground: require("../../assets/animals/starfish.jpeg"),
       animalPath: require("../../assets/animals/starfish.json"),
-      animalSound: require("../../assets/animals/starfish.mp3"),
+      animalSound: require("../../assets/animals/starfish_en.mp3"),
     },
   ];
+
   //Funcion para obtener un numero random (Se usa para obtener una imagen al azar y que no sea igual al anterior)
   const getRandomInt = (min: number, max: number, exclude?: number): number => {
     let random = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -146,8 +148,7 @@ export const DDGame: React.FC<Props> = () => {
           <Modal.Content minHeight={"xs"} maxWidth="md">
             <Modal.Body>
               <Text textAlign={"center"} fontSize={"xl"}>
-                You must drag the animal corresponding to the image to win the
-                round
+                {I18n.t("general.DDgameInstructions")}
               </Text>
               <Center>
                 <LottieView

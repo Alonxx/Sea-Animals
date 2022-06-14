@@ -6,6 +6,7 @@ import { TAnimal } from "models";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigate } from "react-router-native";
+import I18n from "../../i18n/index";
 
 interface Props {}
 
@@ -14,67 +15,67 @@ export const Ocean: React.FC<Props> = () => {
 
   const animals: TAnimal[] = [
     {
-      title: "Shark",
+      title: I18n.t("animals.shark"),
       style: { width: 170, height: 170 },
       animalBackground: require("../../assets/animals/shark.jpeg"),
       animalPath: require("../../assets/animals/shark.json"),
-      animalSound: require("../../assets/animals/shark.mp3"),
+      animalSound: I18n.t("sound.shark"),
     },
     {
-      title: "Octopus",
+      title: I18n.t("animals.octopus"),
       style: { width: 200, height: 200 },
       animalBackground: require("../../assets/animals/octopus.jpeg"),
       animalPath: require("../../assets/animals/octopus.json"),
-      animalSound: require("../../assets/animals/octopus.mp3"),
+      animalSound: I18n.t("sound.octopus"),
     },
     {
-      title: "Turtle",
+      title: I18n.t("animals.turtle"),
       style: { width: 200, height: 200 },
       animalBackground: require("../../assets/animals/turtle.jpeg"),
       animalPath: require("../../assets/animals/turtle.json"),
-      animalSound: require("../../assets/animals/turtle.mp3"),
+      animalSound: I18n.t("sound.turtle"),
     },
     {
-      title: "Squid",
+      title: I18n.t("animals.squid"),
       style: { width: 170, height: 170 },
       animalBackground: require("../../assets/animals/squid.jpeg"),
       animalPath: require("../../assets/animals/squid.json"),
-      animalSound: require("../../assets/animals/squid.mp3"),
+      animalSound: I18n.t("sound.squid"),
     },
     {
-      title: "Blowfish",
+      title: I18n.t("animals.blowfish"),
       style: { width: 170, height: 170, marginTop: -15 },
       animalBackground: require("../../assets/animals/blowfish.jpeg"),
       animalPath: require("../../assets/animals/blowfish.json"),
-      animalSound: require("../../assets/animals/blowfish.mp3"),
+      animalSound: I18n.t("sound.blowfish"),
     },
     {
-      title: "Fish",
+      title: I18n.t("animals.fish"),
       style: { width: 130, height: 130 },
       animalBackground: require("../../assets/animals/fish.jpeg"),
       animalPath: require("../../assets/animals/fish.json"),
-      animalSound: require("../../assets/animals/fish.mp3"),
+      animalSound: I18n.t("sound.fish"),
     },
     {
-      title: "Dolphin",
+      title: I18n.t("animals.dolphin"),
       style: { width: 130, height: 130 },
       animalBackground: require("../../assets/animals/dolphin.jpeg"),
       animalPath: require("../../assets/animals/dolphin.json"),
-      animalSound: require("../../assets/animals/dolphin.mp3"),
+      animalSound: I18n.t("sound.dolphin"),
     },
     {
-      title: "Crab",
+      title: I18n.t("animals.crab"),
       style: { width: 120, height: 120 },
       animalBackground: require("../../assets/animals/crab.jpeg"),
       animalPath: require("../../assets/animals/crab.json"),
-      animalSound: require("../../assets/animals/crab.mp3"),
+      animalSound: I18n.t("sound.crab"),
     },
     {
-      title: "Starfish",
+      title: I18n.t("animals.starfish"),
       style: { width: 120, height: 120, marginLeft: 15 },
       animalBackground: require("../../assets/animals/starfish.jpeg"),
       animalPath: require("../../assets/animals/starfish.json"),
-      animalSound: require("../../assets/animals/starfish.mp3"),
+      animalSound: I18n.t("sound.starfish"),
     },
   ];
   const navigate = useNavigate();

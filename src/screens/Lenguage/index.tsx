@@ -1,5 +1,6 @@
 import { Center, Text, Box, HStack, VStack, Button } from "native-base";
 import { useNavigate } from "react-router";
+import i18n from "i18n-js";
 
 export const Lenguage: React.FC = () => {
   const navigate = useNavigate();
@@ -9,7 +10,10 @@ export const Lenguage: React.FC = () => {
       <Center margin={"auto"}>
         <VStack space={8} alignItems={"center"}>
           <Button
-            onPress={() => navigate("/home")}
+            onPress={() => {
+              i18n.locale = "en";
+              navigate("/home");
+            }}
             width={"sm"}
             borderRadius={"3xl"}
             colorScheme={"yellow"}
@@ -23,7 +27,10 @@ export const Lenguage: React.FC = () => {
           </Button>
 
           <Button
-            onPress={() => navigate("/home")}
+            onPress={() => {
+              i18n.locale = "es";
+              navigate("/home");
+            }}
             width={"sm"}
             borderRadius={"3xl"}
             colorScheme={"yellow"}

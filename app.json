@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "animales_Oceano",
-    "slug": "animales_Oceano",
+    "name": "Sea Animals",
+    "slug": "SeaAnimals",
     "version": "1.0.0",
     "orientation": "landscape",
     "icon": "./assets/icon.png",
@@ -22,7 +22,30 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "versionCode": 1,
+      "package": "com.alonxx.sea_animals",
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "ACCESS_WIFI_STATE",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "READ_INTERNAL_STORAGE",
+        "WRITE_INTERNAL_STORAGE",
+        "FOREGROUND_SERVICE",
+        "ACCESS_NOTIFICATION_POLICY",
+        "NOTIFICATION_SERVICE",
+        "READ_PHONE_STATE",
+        "WAKE_LOCK",
+        "INSTALL_SHORTCUT",
+        "RECEIVE",
+        "READ_SETTINGS"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
