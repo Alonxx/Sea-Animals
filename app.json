@@ -24,7 +24,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "versionCode": 1,
-      "package": "com.alonxx.sea_animals",
+      "package": "com.alonxx.seaanimals",
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE",

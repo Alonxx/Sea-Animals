@@ -49,18 +49,22 @@ export const WaterButton: React.FC<Props> = ({
                 speed={random}
                 loop
                 source={require("../../assets/UI/buttonWater.json")}
+              />
+              <Box
+                position={"absolute"}
+                height={"full"}
+                width={"full"}
+                justifyContent={"center"}
               >
-                <Box height={"full"} width={"full"} justifyContent={"center"}>
-                  <Text
-                    fontWeight={"semibold"}
-                    fontSize={"xl"}
-                    color={titleColor}
-                    textAlign={"center"}
-                  >
-                    {title}
-                  </Text>
-                </Box>
-              </LottieView>
+                <Text
+                  fontWeight={"semibold"}
+                  fontSize={"xl"}
+                  color={titleColor}
+                  textAlign={"center"}
+                >
+                  {title}
+                </Text>
+              </Box>
             </Box>
           );
         }}

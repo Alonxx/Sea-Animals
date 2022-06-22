@@ -14,11 +14,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
 import { Animal, WaterButton } from "../../components";
 import { DraxProvider, DraxView } from "react-native-drax";
-import { ImageBackground, Pressable } from "react-native";
+import { ImageBackground } from "react-native";
 import React, { useRef } from "react";
 import { Audio } from "expo-av";
 import { useNavigate } from "react-router-native";
 import I18n from "../../i18n/index";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 /*
  * Componente encargado de renderizar la screen del juego DragAndDrop
@@ -138,59 +139,59 @@ export const DDGame: React.FC<Props> = () => {
   }, []);
 
   return (
-    <View>
-      <Center>
-        <Modal
-          backgroundColor={"#0000044f"}
-          isOpen={showModal}
-          onClose={() => setShowModal(false)}
-        >
-          <Modal.Content minHeight={"xs"} maxWidth="md">
-            <Modal.Body>
-              <Text textAlign={"center"} fontSize={"xl"}>
-                {I18n.t("general.DDgameInstructions")}
-              </Text>
-              <Center>
-                <LottieView
-                  style={{
-                    width: 120,
-                    height: 120,
-                  }}
-                  speed={-1}
-                  autoPlay
-                  loop={true}
-                  source={require("../../assets/UI/dragAndDrop.json")}
-                />
-                <WaterButton
-                  style={{ width: 100, height: 100 }}
-                  buttonColor="#0062ff"
-                  title="Play"
-                  handler={() => setShowModal(false)}
-                />
-              </Center>
-            </Modal.Body>
-          </Modal.Content>
-        </Modal>
-      </Center>
+    <GestureHandlerRootView>
+      <View>
+        <Center>
+          <Modal
+            backgroundColor={"#0000044f"}
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+          >
+            <Modal.Content minHeight={"xs"} maxWidth="md">
+              <Modal.Body>
+                <Text textAlign={"center"} fontSize={"xl"}>
+                  {I18n.t("general.DDgameInstructions")}
+                </Text>
+                <Center>
+                  <LottieView
+                    style={{
+                      width: 120,
+                      height: 120,
+                    }}
+                    speed={-1}
+                    autoPlay
+                    loop={true}
+                    source={require("../../assets/UI/dragAndDrop.json")}
+                  />
+                  <WaterButton
+                    style={{ width: 100, height: 100 }}
+                    buttonColor="#0062ff"
+                    title="Play"
+                    handler={() => setShowModal(false)}
+                  />
+                </Center>
+              </Modal.Body>
+            </Modal.Content>
+          </Modal>
+        </Center>
 
-      <LottieView
-        style={{
-          width: 600,
-          height: 600,
-          position: "absolute",
-          alignSelf: "center",
-          bottom: 0,
-          zIndex: 5,
-          display: isWinner ? "flex" : "none",
-        }}
-        ref={confetti}
-        onAnimationFinish={() => setIsWinner(false)}
-        loop={false}
-        source={require("../../assets/UI/confetti.json")}
-      />
-      <ScrollView>
-        <DraxProvider>
-          <SafeAreaView>
+        <LottieView
+          style={{
+            width: 600,
+            height: 600,
+            position: "absolute",
+            alignSelf: "center",
+            bottom: 0,
+            zIndex: 5,
+            display: isWinner ? "flex" : "none",
+          }}
+          ref={confetti}
+          onAnimationFinish={() => setIsWinner(false)}
+          loop={false}
+          source={require("../../assets/UI/confetti.json")}
+        />
+        <ScrollView>
+          <DraxProvider>
             <VStack>
               <HStack justifyContent={"center"}>
                 <Button
@@ -261,9 +262,9 @@ export const DDGame: React.FC<Props> = () => {
                 ))}
               </HStack>
             </VStack>
-          </SafeAreaView>
-        </DraxProvider>
-      </ScrollView>
-    </View>
+          </DraxProvider>
+        </ScrollView>
+      </View>
+    </GestureHandlerRootView>
   );
 };
