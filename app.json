@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8c52ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,7 +21,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#8c52ff"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9888324300364207~7805976208"
       },
       "versionCode": 1,
       "package": "com.alonxx.seaanimals",
@@ -32,11 +35,8 @@
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
         "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
         "RECEIVE_BOOT_COMPLETED",
         "VIBRATE",
-        "READ_INTERNAL_STORAGE",
-        "WRITE_INTERNAL_STORAGE",
         "FOREGROUND_SERVICE",
         "ACCESS_NOTIFICATION_POLICY",
         "NOTIFICATION_SERVICE",

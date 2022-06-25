@@ -1,17 +1,21 @@
 import { View, HStack, ScrollView, Button } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
-import { Animal } from "../../components";
+import { AdBanner, Animal } from "../../components";
 import { TAnimal } from "models";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigate } from "react-router-native";
 import I18n from "../../i18n/index";
+import { useShowAdVideo } from "../../hooks";
 
 interface Props {}
 
 export const Ocean: React.FC<Props> = () => {
   const [isEnter, setIsEnter] = React.useState<boolean>(false);
+  const [countPressToShowAd, setCountPressToShowAd] = React.useState<number>(0);
+
+  const showAdVideo = useShowAdVideo(countPressToShowAd, setCountPressToShowAd);
 
   const animals: TAnimal[] = [
     {
@@ -90,6 +94,7 @@ export const Ocean: React.FC<Props> = () => {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
         >
+          <AdBanner />
           <Button
             backgroundColor={"transparent"}
             position="absolute"
@@ -119,7 +124,11 @@ export const Ocean: React.FC<Props> = () => {
             width={"full"}
           >
             {animals.map((animal) => (
-              <Animal key={animal.title} {...animal} />
+              <Animal
+                key={animal.title}
+                setCountPressToShowAd={setCountPressToShowAd}
+                {...animal}
+              />
             ))}
           </HStack>
         </ScrollView>

@@ -12,7 +12,7 @@ import {
 } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
-import { Animal, WaterButton } from "../../components";
+import { AdBanner, Animal, WaterButton } from "../../components";
 import { DraxProvider, DraxView } from "react-native-drax";
 import { ImageBackground } from "react-native";
 import React, { useRef } from "react";
@@ -20,12 +20,11 @@ import { Audio } from "expo-av";
 import { useNavigate } from "react-router-native";
 import I18n from "../../i18n/index";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
+import { Ionicons } from "@expo/vector-icons";
+import { useShowAdVideo } from "../../hooks";
 /*
  * Componente encargado de renderizar la screen del juego DragAndDrop
  */
-
-import { Ionicons } from "@expo/vector-icons";
 
 interface Props {}
 
@@ -34,6 +33,7 @@ export const DDGame: React.FC<Props> = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [isWinner, setIsWinner] = React.useState<boolean>(false);
   const [showModal, setShowModal] = React.useState(false);
+  const [countPressToShowAd, setCountPressToShowAd] = React.useState<number>(0);
   const confetti: any = useRef(null);
   const navigate = useNavigate();
   const animals: TAnimal[] = [
@@ -101,7 +101,7 @@ export const DDGame: React.FC<Props> = () => {
       animalSound: require("../../assets/animals/starfish_en.mp3"),
     },
   ];
-
+  const showAdVideo = useShowAdVideo(countPressToShowAd, setCountPressToShowAd);
   //Funcion para obtener un numero random (Se usa para obtener una imagen al azar y que no sea igual al anterior)
   const getRandomInt = (min: number, max: number, exclude?: number): number => {
     let random = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -116,6 +116,7 @@ export const DDGame: React.FC<Props> = () => {
 
   // Funcion que carga y  reproduce el sonido del animal recibido en animalSound
   const playSound = async () => {
+    setCountPressToShowAd((prevState) => prevState + 1);
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/UI/kidsOvation.mp3")
     );
@@ -141,129 +142,139 @@ export const DDGame: React.FC<Props> = () => {
   return (
     <GestureHandlerRootView>
       <View>
-        <Center>
-          <Modal
-            backgroundColor={"#0000044f"}
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-          >
-            <Modal.Content minHeight={"xs"} maxWidth="md">
-              <Modal.Body>
-                <Text textAlign={"center"} fontSize={"xl"}>
-                  {I18n.t("general.DDgameInstructions")}
-                </Text>
-                <Center>
-                  <LottieView
-                    style={{
-                      width: 120,
-                      height: 120,
-                    }}
-                    speed={-1}
-                    autoPlay
-                    loop={true}
-                    source={require("../../assets/UI/dragAndDrop.json")}
-                  />
-                  <WaterButton
-                    style={{ width: 100, height: 100 }}
-                    buttonColor="#0062ff"
-                    title="Play"
-                    handler={() => setShowModal(false)}
-                  />
-                </Center>
-              </Modal.Body>
-            </Modal.Content>
-          </Modal>
-        </Center>
-
-        <LottieView
-          style={{
-            width: 600,
-            height: 600,
-            position: "absolute",
-            alignSelf: "center",
-            bottom: 0,
-            zIndex: 5,
-            display: isWinner ? "flex" : "none",
-          }}
-          ref={confetti}
-          onAnimationFinish={() => setIsWinner(false)}
-          loop={false}
-          source={require("../../assets/UI/confetti.json")}
-        />
-        <ScrollView>
-          <DraxProvider>
-            <VStack>
-              <HStack justifyContent={"center"}>
-                <Button
-                  backgroundColor={"transparent"}
-                  position="absolute"
-                  zIndex={5}
-                  left={0}
-                  onPress={() => navigate("/home")}
-                >
-                  <Ionicons name="arrow-back" size={30} color="white" />
-                </Button>
-                {loading && (
-                  <Box
-                    mt={1}
-                    alignSelf={"center"}
-                    borderWidth={"3"}
-                    borderStyle={"dashed"}
-                    borderRadius={"5px"}
-                    borderColor={"red.500"}
-                    w={"md"}
-                    height={"40"}
-                  >
-                    <DraxView
-                      receivingStyle={{ opacity: 0.5 }}
-                      onReceiveDragDrop={({ dragged: { payload } }) => {
-                        if (payload === animals[animalIndex].title) {
-                          playSound();
-                          setIsWinner(true);
-                          confetti?.current?.play();
-                          setAnimalIndex((prevState) =>
-                            getRandomInt(0, animals.length - 1, prevState)
-                          );
-                        }
+        <SafeAreaView>
+          <Center>
+            <Modal
+              backgroundColor={"#0000044f"}
+              isOpen={showModal}
+              onClose={() => setShowModal(false)}
+            >
+              <Modal.Content minHeight={"xs"} maxWidth="md">
+                <Modal.Body>
+                  <Text textAlign={"center"} fontSize={"xl"}>
+                    {I18n.t("general.DDgameInstructions")}
+                  </Text>
+                  <Center>
+                    <LottieView
+                      style={{
+                        width: 120,
+                        height: 120,
                       }}
-                      renderContent={() => (
-                        <ImageBackground
-                          borderRadius={5}
-                          resizeMode="cover"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            position: "relative",
-
-                            opacity: 1,
-                          }}
-                          source={animals[animalIndex].animalBackground}
-                        />
-                      )}
+                      speed={-1}
+                      autoPlay
+                      loop={true}
+                      source={require("../../assets/UI/dragAndDrop.json")}
                     />
-                  </Box>
-                )}
-              </HStack>
+                    <WaterButton
+                      style={{ width: 100, height: 100 }}
+                      buttonColor="#0062ff"
+                      title={I18n.t("general.playButton")}
+                      handler={() => setShowModal(false)}
+                    />
+                  </Center>
+                </Modal.Body>
+              </Modal.Content>
+            </Modal>
+          </Center>
+          <LottieView
+            style={{
+              width: 600,
+              height: 600,
+              position: "absolute",
+              alignSelf: "center",
+              bottom: 0,
+              zIndex: 5,
+              display: isWinner ? "flex" : "none",
+            }}
+            ref={confetti}
+            onAnimationFinish={() => setIsWinner(false)}
+            loop={false}
+            source={require("../../assets/UI/confetti.json")}
+          />
+          <View>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+            >
+              <AdBanner />
+              <DraxProvider>
+                <VStack>
+                  <HStack justifyContent={"center"}>
+                    <Button
+                      backgroundColor={"transparent"}
+                      position="absolute"
+                      zIndex={5}
+                      left={0}
+                      onPress={() => navigate("/home")}
+                    >
+                      <Ionicons name="arrow-back" size={30} color="white" />
+                    </Button>
+                    {loading && (
+                      <Box
+                        mt={1}
+                        alignSelf={"center"}
+                        borderWidth={"3"}
+                        borderStyle={"dashed"}
+                        borderRadius={"5px"}
+                        borderColor={"red.500"}
+                        w={"md"}
+                        height={"40"}
+                      >
+                        <DraxView
+                          receivingStyle={{ opacity: 0.5 }}
+                          onReceiveDragDrop={({ dragged: { payload } }) => {
+                            if (payload === animals[animalIndex].title) {
+                              playSound();
+                              setIsWinner(true);
+                              confetti?.current?.play();
+                              setAnimalIndex((prevState) =>
+                                getRandomInt(0, animals.length - 1, prevState)
+                              );
+                            }
+                          }}
+                          renderContent={() => (
+                            <ImageBackground
+                              borderRadius={5}
+                              resizeMode="cover"
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                position: "relative",
 
-              <HStack
-                flexWrap={"wrap"}
-                justifyContent={"flex-start"}
-                width={"full"}
-              >
-                {animals.map((animal) => (
-                  <DraxView
-                    key={animal.title}
-                    draggingStyle={{ opacity: 0 }}
-                    dragReleasedStyle={{ opacity: 0 }}
-                    payload={animal.title}
+                                opacity: 1,
+                              }}
+                              source={animals[animalIndex].animalBackground}
+                            />
+                          )}
+                        />
+                      </Box>
+                    )}
+                  </HStack>
+                  <HStack
+                    flexWrap={"wrap"}
+                    justifyContent={"flex-start"}
+                    width={"full"}
                   >
-                    <Animal key={animal.title} {...animal} pressable={false} />
-                  </DraxView>
-                ))}
-              </HStack>
-            </VStack>
-          </DraxProvider>
-        </ScrollView>
+                    {animals.map((animal) => (
+                      <DraxView
+                        key={animal.title}
+                        draggingStyle={{ opacity: 0 }}
+                        dragReleasedStyle={{ opacity: 0 }}
+                        payload={animal.title}
+                      >
+                        <Animal
+                          key={animal.title}
+                          {...animal}
+                          pressable={false}
+                        />
+                      </DraxView>
+                    ))}
+                  </HStack>
+                </VStack>
+              </DraxProvider>
+            </ScrollView>
+          </View>
+        </SafeAreaView>
       </View>
     </GestureHandlerRootView>
   );

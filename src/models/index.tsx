@@ -7,4 +7,5 @@ export type TAnimal = {
   animalPath: any;
   animalSound: any;
   pressable?: boolean;
+  setCountPressToShowAd?: React.Dispatch<React.SetStateAction<number>>;
 };

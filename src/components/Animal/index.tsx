@@ -15,6 +15,7 @@ export const Animal: React.FC<TAnimal> = ({
   animalPath,
   animalSound,
   pressable = true,
+  setCountPressToShowAd,
 }) => {
   const [showCard, setShowCard] = React.useState<boolean>(false);
 
@@ -40,7 +41,14 @@ export const Animal: React.FC<TAnimal> = ({
         </Modal>
       </Center>
       {/*Pressable en el lottie que que muestra el modal */}
-      <Pressable onPress={() => pressable && setShowCard(true)}>
+      <Pressable
+        onPress={() => {
+          pressable && setShowCard(true);
+          if (setCountPressToShowAd) {
+            setCountPressToShowAd((prevState) => prevState + 1);
+          }
+        }}
+      >
         {({ isPressed }) => {
           return (
             <Box

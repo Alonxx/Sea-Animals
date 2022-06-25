@@ -24,6 +24,10 @@ const en = {
   general: {
     DDgameInstructions:
       "You must drag the animal corresponding and drop to the image to win the round",
+    oceanButton: "Ocean 🐙",
+    gameButton: "Game 🐬",
+    title: "Sea Animals ",
+    playButton: "Play",
   },
 };
 

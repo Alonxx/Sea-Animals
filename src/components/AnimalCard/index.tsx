@@ -3,6 +3,7 @@ import { Box, Text, Pressable } from "native-base";
 import React from "react";
 import { ImageBackground } from "react-native";
 import { Audio } from "expo-av";
+import { useShowAdVideo } from "../../hooks";
 
 interface Props {
   animalBackground: any;
@@ -18,12 +19,15 @@ export const AnimalCard: React.FC<Props> = ({
   animalSound,
 }) => {
   const [sound, setSound] = React.useState<Audio.Sound>();
+  const [counToShowAd, setCounToShowAd] = React.useState<number>(0);
+  const showAdVideo = useShowAdVideo(counToShowAd, setCounToShowAd);
 
   // Funcion que carga y  reproduce el sonido del animal recibido en animalSound
   const playAnimalSound = async () => {
     const { sound } = await Audio.Sound.createAsync(animalSound);
     setSound(sound);
     await sound.playAsync();
+    setCounToShowAd((prevState) => prevState + 1);
   };
 
   // UseEffect que limpia el sonido al desmontar el componente
