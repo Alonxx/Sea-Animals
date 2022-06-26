@@ -1,4 +1,3 @@
-import { TAnimal } from "models";
 import {
   View,
   HStack,
@@ -21,7 +20,9 @@ import { useNavigate } from "react-router-native";
 import I18n from "../../i18n/index";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
-import { useShowAdVideo } from "../../hooks";
+import { useGetAnimals, useShowAdVideo } from "../../hooks";
+import { TAnimal } from "models";
+
 /*
  * Componente encargado de renderizar la screen del juego DragAndDrop
  */
@@ -33,75 +34,15 @@ export const DDGame: React.FC<Props> = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [isWinner, setIsWinner] = React.useState<boolean>(false);
   const [showModal, setShowModal] = React.useState(false);
+  const [currentAnimals, setCurrentAnimals] = React.useState<TAnimal[]>([]);
   const [countPressToShowAd, setCountPressToShowAd] = React.useState<number>(0);
   const confetti: any = useRef(null);
   const navigate = useNavigate();
-  const animals: TAnimal[] = [
-    {
-      title: "Shark",
-      style: { width: 90, height: 100 },
-      animalBackground: require("../../assets/animals/shark.jpeg"),
-      animalPath: require("../../assets/animals/shark.json"),
-      animalSound: require("../../assets/animals/shark_en.mp3"),
-    },
-    {
-      title: "Octopus",
-      style: { width: 100, height: 115 },
-      animalBackground: require("../../assets/animals/octopus.jpeg"),
-      animalPath: require("../../assets/animals/octopus.json"),
-      animalSound: require("../../assets/animals/octopus_en.mp3"),
-    },
-    {
-      title: "Turtle",
-      style: { width: 100, height: 110 },
-      animalBackground: require("../../assets/animals/turtle.jpeg"),
-      animalPath: require("../../assets/animals/turtle.json"),
-      animalSound: require("../../assets/animals/turtle_en.mp3"),
-    },
-    {
-      title: "Squid",
-      style: { width: 80, height: 90, marginTop: 5 },
-      animalBackground: require("../../assets/animals/squid.jpeg"),
-      animalPath: require("../../assets/animals/squid.json"),
-      animalSound: require("../../assets/animals/squid_en.mp3"),
-    },
-    {
-      title: "Blowfish",
-      style: { width: 90, height: 105, marginTop: -5 },
-      animalBackground: require("../../assets/animals/blowfish.jpeg"),
-      animalPath: require("../../assets/animals/blowfish.json"),
-      animalSound: require("../../assets/animals/blowfish_en.mp3"),
-    },
-    {
-      title: "Fish",
-      style: { width: 80, height: 80, marginTop: 5 },
-      animalBackground: require("../../assets/animals/fish.jpeg"),
-      animalPath: require("../../assets/animals/fish.json"),
-      animalSound: require("../../assets/animals/fish_en.mp3"),
-    },
-    {
-      title: "Dolphin",
-      style: { width: 70, height: 80, marginTop: 5 },
-      animalBackground: require("../../assets/animals/dolphin.jpeg"),
-      animalPath: require("../../assets/animals/dolphin.json"),
-      animalSound: require("../../assets/animals/dolphin_en.mp3"),
-    },
-    {
-      title: "Crab",
-      style: { width: 60, height: 70, marginTop: 5 },
-      animalBackground: require("../../assets/animals/crab.jpeg"),
-      animalPath: require("../../assets/animals/crab.json"),
-      animalSound: require("../../assets/animals/crab_en.mp3"),
-    },
-    {
-      title: "Starfish",
-      style: { width: 60, height: 70, marginLeft: 10, marginTop: 5 },
-      animalBackground: require("../../assets/animals/starfish.jpeg"),
-      animalPath: require("../../assets/animals/starfish.json"),
-      animalSound: require("../../assets/animals/starfish_en.mp3"),
-    },
-  ];
+
+  const animals = useGetAnimals();
+
   const showAdVideo = useShowAdVideo(countPressToShowAd, setCountPressToShowAd);
+
   //Funcion para obtener un numero random (Se usa para obtener una imagen al azar y que no sea igual al anterior)
   const getRandomInt = (min: number, max: number, exclude?: number): number => {
     let random = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -116,12 +57,28 @@ export const DDGame: React.FC<Props> = () => {
 
   // Funcion que carga y  reproduce el sonido del animal recibido en animalSound
   const playSound = async () => {
-    setCountPressToShowAd((prevState) => prevState + 1);
+    //setCountPressToShowAd((prevState) => prevState + 1);
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/UI/kidsOvation.mp3")
     );
     setSound(sound);
     await sound.playAsync();
+  };
+
+  const changeAnimals = () => {
+    let newAnimals = [];
+    let useIndex: number[] = [];
+    let random = getRandomInt(0, animals.length - 1);
+
+    for (let i = 0; i < 4; i++) {
+      random = getRandomInt(0, animals.length - 1, random);
+      while (useIndex.includes(random)) {
+        random = getRandomInt(0, animals.length - 1, random);
+      }
+      useIndex.push(random);
+      newAnimals.push(animals[random]);
+    }
+    setCurrentAnimals(newAnimals);
   };
 
   // UseEffect que limpia el sonido al desmontar el componente
@@ -135,7 +92,8 @@ export const DDGame: React.FC<Props> = () => {
 
   React.useEffect(() => {
     setShowModal(true);
-    setAnimalIndex(getRandomInt(0, animals.length - 1));
+    changeAnimals();
+    setAnimalIndex(getRandomInt(0, currentAnimals.length - 1));
     setLoading(true);
   }, []);
 
@@ -223,12 +181,15 @@ export const DDGame: React.FC<Props> = () => {
                         <DraxView
                           receivingStyle={{ opacity: 0.5 }}
                           onReceiveDragDrop={({ dragged: { payload } }) => {
-                            if (payload === animals[animalIndex].title) {
+                            if (payload === currentAnimals[animalIndex].title) {
                               playSound();
                               setIsWinner(true);
                               confetti?.current?.play();
+                              changeAnimals();
                               setAnimalIndex((prevState) =>
-                                getRandomInt(0, animals.length - 1, prevState)
+                                prevState + 1 > currentAnimals.length - 1
+                                  ? 0
+                                  : prevState + 1
                               );
                             }
                           }}
@@ -243,7 +204,9 @@ export const DDGame: React.FC<Props> = () => {
 
                                 opacity: 1,
                               }}
-                              source={animals[animalIndex].animalBackground}
+                              source={
+                                currentAnimals[animalIndex].animalBackground
+                              }
                             />
                           )}
                         />
@@ -254,8 +217,9 @@ export const DDGame: React.FC<Props> = () => {
                     flexWrap={"wrap"}
                     justifyContent={"flex-start"}
                     width={"full"}
+                    height={"full"}
                   >
-                    {animals.map((animal) => (
+                    {currentAnimals.map((animal) => (
                       <DraxView
                         key={animal.title}
                         draggingStyle={{ opacity: 0 }}

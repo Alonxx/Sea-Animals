@@ -1,4 +1,12 @@
-import { Box, Text, VStack, ScrollView, Center, Button } from "native-base";
+import {
+  Box,
+  Text,
+  VStack,
+  ScrollView,
+  Center,
+  Button,
+  Image,
+} from "native-base";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WaterButton, AdBanner } from "../../components";
