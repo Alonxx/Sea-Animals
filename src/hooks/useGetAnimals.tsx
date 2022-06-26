@@ -9,6 +9,9 @@ import {
   Blowfish,
   Starfish,
   Turtle,
+  Seahorse,
+  Whale,
+  Seacow,
 } from "../assets/animals/index";
 import I18n from "../i18n/index";
 
@@ -42,6 +45,12 @@ export const useGetAnimals = () => {
         animalSound: I18n.t("sound.squid"),
       },
       {
+        title: I18n.t("animals.whale"),
+        animalBackground: require("../assets/animals/whale.jpeg"),
+        animalComponent: <Whale width={"100%"} heigth={"100%"} />,
+        animalSound: I18n.t("sound.whale"),
+      },
+      {
         title: I18n.t("animals.crab"),
         animalBackground: require("../assets/animals/crab.jpeg"),
         animalComponent: <Crab width={"100%"} heigth={"100%"} />,
@@ -54,6 +63,12 @@ export const useGetAnimals = () => {
         animalSound: I18n.t("sound.fish"),
       },
       {
+        title: I18n.t("animals.seacow"),
+        animalBackground: require("../assets/animals/seacow.jpeg"),
+        animalComponent: <Seacow width={"100%"} heigth={"100%"} />,
+        animalSound: I18n.t("sound.seacow"),
+      },
+      {
         title: I18n.t("animals.blowfish"),
         animalBackground: require("../assets/animals/blowfish.jpeg"),
         animalComponent: <Blowfish width={"100%"} heigth={"100%"} />,
@@ -64,6 +79,12 @@ export const useGetAnimals = () => {
         animalBackground: require("../assets/animals/turtle.jpeg"),
         animalComponent: <Turtle width={"100%"} heigth={"100%"} />,
         animalSound: I18n.t("sound.turtle"),
+      },
+      {
+        title: I18n.t("animals.seahorse"),
+        animalBackground: require("../assets/animals/seahorse.jpeg"),
+        animalComponent: <Seahorse width={"100%"} heigth={"100%"} />,
+        animalSound: I18n.t("sound.seahorse"),
       },
       {
         title: I18n.t("animals.starfish"),

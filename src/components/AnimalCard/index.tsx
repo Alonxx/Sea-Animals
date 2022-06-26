@@ -92,7 +92,11 @@ export const AnimalCard: React.FC<Props> = ({
                   source={require("../../assets/UI/touch.json")}
                 />
 
-                <Text letterSpacing={6} fontSize={"6xl"} color={"white"}>
+                <Text
+                  letterSpacing={6}
+                  fontSize={title.length > 13 ? "5xl" : "6xl"}
+                  color={"white"}
+                >
                   {title}
                 </Text>
                 <LottieView

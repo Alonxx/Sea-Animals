@@ -9,6 +9,9 @@ const en = {
     squid: "Squid",
     turtle: "Turtle",
     starfish: "Starfish",
+    whale: "Whale",
+    seacow: "Seacow",
+    seahorse: "Seahorse",
   },
   sound: {
     shark: require("../assets/animals/shark_en.mp3"),
@@ -20,6 +23,9 @@ const en = {
     squid: require("../assets/animals/squid_en.mp3"),
     turtle: require("../assets/animals/turtle_en.mp3"),
     starfish: require("../assets/animals/starfish_en.mp3"),
+    whale: require("../assets/animals/whale_en.mp3"),
+    seacow: require("../assets/animals/seacow_en.mp3"),
+    seahorse: require("../assets/animals/seahorse_en.mp3"),
   },
   general: {
     DDgameInstructions:

@@ -7,6 +7,9 @@ import Fish from "./fish.svg";
 import Blowfish from "./blowfish.svg";
 import Turtle from "./turtle.svg";
 import Starfish from "./starfish.svg";
+import Whale from "./whale.svg";
+import Seacow from "./seacow.svg";
+import Seahorse from "./seahorse.svg";
 
 export {
   Dolphin,
@@ -18,4 +21,7 @@ export {
   Blowfish,
   Turtle,
   Starfish,
+  Whale,
+  Seacow,
+  Seahorse,
 };
