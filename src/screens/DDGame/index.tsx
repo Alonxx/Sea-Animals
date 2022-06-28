@@ -57,7 +57,7 @@ export const DDGame: React.FC<Props> = () => {
 
   // Funcion que carga y  reproduce el sonido del animal recibido en animalSound
   const playSound = async () => {
-    setCountPressToShowAd((prevState) => prevState + 1);
+    //setCountPressToShowAd((prevState) => prevState + 1);
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/UI/kidsOvation.mp3")
     );

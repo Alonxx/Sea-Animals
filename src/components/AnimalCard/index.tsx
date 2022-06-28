@@ -30,6 +30,11 @@ export const AnimalCard: React.FC<Props> = ({
     setCounToShowAd((prevState) => prevState + 1);
   };
 
+  // useEffect que carga el sonido del animal y lo reproduce al abrir la card
+  React.useEffect(() => {
+    playAnimalSound();
+  }, []);
+
   // UseEffect que limpia el sonido al desmontar el componente
   React.useEffect(() => {
     return sound
