@@ -29,9 +29,9 @@ const en = {
   },
   general: {
     DDgameInstructions:
-      "You must drag the animal corresponding and drop to the image to win the round",
+      "You must drag the corresponding animal and drop it over the image to win the round",
     oceanButton: "Ocean 🐙",
-    gameButton: "Game 🐬",
+    gameButton: "Play Game 🐬",
     title: "Sea Animals ",
     playButton: "Play",
   },

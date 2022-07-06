@@ -18,7 +18,7 @@ export const useShowAdVideo = (
 ) => {
   const showAdVideo = useCallback(() => {
     React.useEffect(() => {
-      if (count >= 3) {
+      if (count >= 4) {
         AdMobInterstitial.getIsReadyAsync()
           .then((isReady) => {
             if (isReady) {

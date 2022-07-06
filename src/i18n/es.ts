@@ -31,7 +31,7 @@ const es = {
     DDgameInstructions:
       "Debes arrastrar el animal correspondiente y soltarlo en la imagen para ganar la ronda",
     oceanButton: "Océano 🐙",
-    gameButton: "Juego 🐬",
+    gameButton: "Jugar 🐬",
     title: "Animales marinos ",
     playButton: "Jugar",
   },

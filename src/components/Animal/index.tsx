@@ -1,4 +1,3 @@
-import LottieView from "lottie-react-native";
 import { TAnimal } from "models";
 import { Box, Pressable, Modal, Center } from "native-base";
 import React from "react";
@@ -21,6 +20,7 @@ export const Animal: React.FC<TAnimal> = ({
     new Animated.Value(0)
   );
 
+  //Useeffect para animacion de los animales
   React.useEffect(() => {
     let random = Math.random() * (1300 - 1000) + 1000;
 
@@ -70,7 +70,7 @@ export const Animal: React.FC<TAnimal> = ({
           </Modal.Content>
         </Modal>
       </Center>
-      {/*Pressable en el lottie que que muestra el modal */}
+      {/*Pressable en el animal que que muestra el modal */}
       <Pressable
         onPress={() => {
           pressable && setShowCard(true);

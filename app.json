@@ -42,7 +42,7 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-9888324300364207~7805976208"
       },
-      "versionCode": 1,
+      "versionCode": 3,
       "package": "com.alonxx.seaanimals",
       "permissions": [
         "INTERNET",
